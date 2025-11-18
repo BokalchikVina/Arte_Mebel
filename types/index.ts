@@ -1,39 +1,28 @@
 /**
  * @fileoverview Type definitions for Furniture Store
- * @version 1.0.0
+ * @version 2.0.0
  */
 
-export interface Product {
+export interface Project {
   id: string;
-  name: string;
+  title: string;
   description: string;
-  price: number;
-  oldPrice?: number;
-  category: ProductCategory;
+  category: ProjectCategory;
   images: string[];
-  materials: string[];
-  dimensions: Dimensions;
-  customizable: boolean;
-  inStock: boolean;
-  rating: number;
-  reviewsCount: number;
+  completedDate: string;
+  duration: string;
+  client?: string;
+  location?: string;
+  tags: string[];
+  featured: boolean;
 }
 
-export interface Dimensions {
-  width: number;
-  height: number;
-  depth: number;
-  unit: 'cm' | 'mm' | 'm';
-}
-
-export type ProductCategory = 
-  | 'sofas'
-  | 'chairs'
-  | 'tables'
-  | 'beds'
-  | 'wardrobes'
+export type ProjectCategory = 
+  | 'living-room'
+  | 'bedroom'
   | 'kitchen'
   | 'office'
+  | 'commercial'
   | 'custom';
 
 export interface ContactForm {
@@ -41,7 +30,7 @@ export interface ContactForm {
   phone: string;
   email?: string;
   message: string;
-  productId?: string;
+  projectType?: string;
 }
 
 export interface YandexMetrikaConfig {
@@ -50,4 +39,12 @@ export interface YandexMetrikaConfig {
   trackLinks: boolean;
   accurateTrackBounce: boolean;
   webvisor: boolean;
+}
+
+export interface GalleryImage {
+  id: string;
+  url: string;
+  title: string;
+  category: ProjectCategory;
+  thumbnail?: string;
 }

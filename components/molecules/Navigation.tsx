@@ -36,7 +36,7 @@ export const Navigation = () => {
     <>
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 ios-transition ${
-          isScrolled ? 'glass shadow-lg' : 'bg-transparent'
+          isScrolled ? 'glass-strong shadow-lg' : 'glass-subtle'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -50,8 +50,8 @@ export const Navigation = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="text-3xl">🪑</span>
-              <span className="text-xl font-bold text-gray-900">
+              <span className="text-3xl">✨</span>
+              <span className="text-xl font-bold text-white drop-shadow-lg">
                 {SITE_CONFIG.name}
               </span>
             </motion.div>
@@ -62,7 +62,7 @@ export const Navigation = () => {
                 <motion.button
                   key={item.href}
                   onClick={() => handleNavClick(item.href)}
-                  className="text-gray-700 hover:text-ios-blue ios-transition font-medium"
+                  className="text-white/90 hover:text-white ios-transition font-medium"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -130,7 +130,7 @@ export const Navigation = () => {
 
             {/* Menu */}
             <motion.div
-              className="absolute top-20 left-4 right-4 glass rounded-3xl p-6 space-y-4"
+              className="absolute top-20 left-4 right-4 glass-strong rounded-3xl p-6 space-y-4"
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -140,7 +140,7 @@ export const Navigation = () => {
                 <motion.button
                   key={item.href}
                   onClick={() => handleNavClick(item.href)}
-                  className="block w-full text-left text-lg font-medium text-gray-900 p-4 rounded-2xl hover:bg-white/50 ios-transition"
+                  className="block w-full text-left text-lg font-medium text-white p-4 rounded-2xl hover:glass-subtle ios-transition"
                   whileTap={{ scale: 0.95 }}
                 >
                   {item.label}

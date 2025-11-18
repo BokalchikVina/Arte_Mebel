@@ -2,12 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* iOS-inspired color scheme with glass morphism */
+/* iOS 18 True Glassmorphism */
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-bg-strong: rgba(255, 255, 255, 0.4);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  --glass-shadow-strong: 0 20px 60px 0 rgba(31, 38, 135, 0.2);
   --ios-blue: #007AFF;
+  --ios-purple: #AF52DE;
+  --ios-pink: #FF2D55;
+  --ios-orange: #FF9500;
   --ios-gray: #8E8E93;
   --ios-light-gray: #F2F2F7;
   --ios-background: #F5F5F7;
@@ -19,11 +25,25 @@
   }
   
   body {
-    @apply bg-gradient-to-br from-ios-background via-white to-ios-lightGray;
+    background: linear-gradient(135deg, 
+      #667eea 0%, 
+      #764ba2 25%, 
+      #f093fb 50%, 
+      #4facfe 75%, 
+      #00f2fe 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
     @apply text-gray-900 font-sans antialiased;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   html {
@@ -32,20 +52,43 @@
 }
 
 @layer components {
-  /* Glass morphism effect - iOS style */
+  /* True iOS 18 Glassmorphism */
   .glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(40px) saturate(200%) brightness(110%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(110%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.1),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(60px) saturate(200%) brightness(120%);
+    -webkit-backdrop-filter: blur(60px) saturate(200%) brightness(120%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 
+      0 20px 60px 0 rgba(31, 38, 135, 0.15),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .glass-subtle {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px) saturate(180%) brightness(105%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%) brightness(105%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.08);
   }
 
   .glass-dark {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(30, 30, 30, 0.5);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
   }
 
   /* iOS-style button effect */

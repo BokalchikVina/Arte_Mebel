@@ -13,25 +13,25 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="glass border-t border-white/20 mt-20">
+    <footer className="glass-strong border-t border-white/40 mt-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <span className="text-3xl">🪑</span>
-              <span className="text-xl font-bold text-gray-900">
+              <span className="text-3xl">✨</span>
+              <span className="text-xl font-bold text-white">
                 {SITE_CONFIG.name}
               </span>
             </div>
-            <p className="text-gray-600 text-sm">
+            <p className="text-white/80 text-sm">
               Индивидуальное производство мебели премиум-класса с 2012 года
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Навигация</h3>
+            <h3 className="font-semibold text-white mb-4">Навигация</h3>
             <ul className="space-y-2">
               {NAVIGATION_ITEMS.map((item) => (
                 <li key={item.href}>
@@ -41,7 +41,7 @@ export const Footer = () => {
                         smoothScrollTo(item.href.substring(1));
                       }
                     }}
-                    className="text-gray-600 hover:text-ios-blue ios-transition text-sm"
+                    className="text-white/80 hover:text-white ios-transition text-sm"
                   >
                     {item.label}
                   </button>
@@ -52,12 +52,12 @@ export const Footer = () => {
 
           {/* Contacts */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Контакты</h3>
+            <h3 className="font-semibold text-white mb-4">Контакты</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
                   href={`tel:${SITE_CONFIG.phone}`}
-                  className="text-gray-600 hover:text-ios-blue ios-transition"
+                  className="text-white/80 hover:text-white ios-transition"
                 >
                   {SITE_CONFIG.phone}
                 </a>
@@ -65,13 +65,13 @@ export const Footer = () => {
               <li>
                 <a
                   href={`mailto:${SITE_CONFIG.email}`}
-                  className="text-gray-600 hover:text-ios-blue ios-transition"
+                  className="text-white/80 hover:text-white ios-transition"
                 >
                   {SITE_CONFIG.email}
                 </a>
               </li>
-              <li className="text-gray-600">{SITE_CONFIG.address}</li>
-              <li className="text-gray-600 text-xs mt-2">
+              <li className="text-white/80">{SITE_CONFIG.address}</li>
+              <li className="text-white/70 text-xs mt-2">
                 {SITE_CONFIG.workingHours}
               </li>
             </ul>
@@ -79,7 +79,7 @@ export const Footer = () => {
 
           {/* Social */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Соцсети</h3>
+            <h3 className="font-semibold text-white mb-4">Соцсети</h3>
             <div className="flex gap-3">
               <motion.a
                 href={SOCIAL_LINKS.vk}
@@ -119,13 +119,13 @@ export const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
+        <div className="border-t border-white/30 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-white/80">
           <p>© {currentYear} {SITE_CONFIG.name}. Все права защищены.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
-            <button className="hover:text-ios-blue ios-transition">
+            <button className="hover:text-white ios-transition">
               Политика конфиденциальности
             </button>
-            <button className="hover:text-ios-blue ios-transition">
+            <button className="hover:text-white ios-transition">
               Договор оферты
             </button>
           </div>

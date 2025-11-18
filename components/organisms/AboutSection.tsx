@@ -50,8 +50,14 @@ const stats = [
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-white/50">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 relative">
+      {/* Background Effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-40 left-20 w-72 h-72 bg-pink-400/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-40 right-20 w-72 h-72 bg-cyan-400/20 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
@@ -60,12 +66,23 @@ export const AboutSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <motion.div
+            className="inline-block glass-strong rounded-full px-6 py-2 mb-6"
+            whileHover={{ scale: 1.05 }}
+          >
+            <span className="text-white/90 font-medium">💎 О компании</span>
+          </motion.div>
+
+          <h2 className="text-5xl sm:text-6xl font-bold text-white mb-6"
+              style={{ textShadow: '0 4px 30px rgba(0, 0, 0, 0.3)' }}>
             Почему выбирают нас
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Мы создаём мебель, которая служит десятилетиями
-          </p>
+
+          <div className="glass-strong rounded-3xl px-8 py-4 inline-block">
+            <p className="text-xl text-white/90">
+              Создаём мебель, которая служит десятилетиями
+            </p>
+          </div>
         </motion.div>
 
         {/* Features Grid */}
@@ -78,12 +95,12 @@ export const AboutSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card variant="glass" padding="lg" hoverable>
+              <Card variant="glass" padding="lg" hoverable className="glass-strong border-2 border-white/30">
                 <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-bold text-white mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <p className="text-white/80">{feature.description}</p>
               </Card>
             </motion.div>
           ))}
@@ -91,7 +108,7 @@ export const AboutSection = () => {
 
         {/* Stats */}
         <motion.div
-          className="glass rounded-3xl p-8 md:p-12"
+          className="glass-strong rounded-3xl p-8 md:p-12 border-2 border-white/30"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -107,10 +124,10 @@ export const AboutSection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="text-4xl md:text-5xl font-bold text-ios-blue mb-2">
+                <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                   {stat.value}
                 </div>
-                <div className="text-gray-600 text-sm md:text-base">
+                <div className="text-white/80 text-sm md:text-base">
                   {stat.label}
                 </div>
               </motion.div>
@@ -126,37 +143,46 @@ export const AboutSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="text-3xl font-bold text-gray-900 text-center mb-12">
-            Как мы работаем
-          </h3>
+          <div className="glass-strong rounded-full px-6 py-2 mb-8 inline-block">
+            <h3 className="text-2xl font-bold text-white text-center">
+              🔄 Как мы работаем
+            </h3>
+          </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
             {[
-              { step: '01', title: 'Консультация', desc: 'Обсуждаем ваши пожелания' },
-              { step: '02', title: 'Замеры', desc: 'Выезжаем и делаем замеры' },
-              { step: '03', title: 'Производство', desc: 'Изготавливаем мебель' },
-              { step: '04', title: 'Доставка', desc: 'Привозим и собираем' },
+              { step: '01', title: 'Консультация', desc: 'Обсуждаем ваши пожелания', icon: '💬' },
+              { step: '02', title: 'Дизайн-проект', desc: 'Создаём 3D визуализацию', icon: '📐' },
+              { step: '03', title: 'Производство', desc: 'Изготавливаем мебель', icon: '🔨' },
+              { step: '04', title: 'Установка', desc: 'Доставляем и монтируем', icon: '🚚' },
             ].map((item, index) => (
               <motion.div
                 key={index}
                 className="relative"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
+                whileHover={{ y: -10 }}
               >
-                <Card variant="glass" padding="lg" className="h-full">
-                  <div className="text-5xl font-bold text-ios-blue/20 mb-4">
+                <Card variant="glass" padding="lg" className="h-full glass-strong border-2 border-white/30">
+                  <div className="text-5xl mb-4">{item.icon}</div>
+                  <div className="text-4xl font-bold text-white/40 mb-4">
                     {item.step}
                   </div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">
+                  <h4 className="text-xl font-bold text-white mb-2">
                     {item.title}
                   </h4>
-                  <p className="text-gray-600">{item.desc}</p>
+                  <p className="text-white/80">{item.desc}</p>
                 </Card>
                 
                 {index < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-ios-blue to-transparent" />
+                  <motion.div 
+                    className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-white/60 to-transparent"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.15 + 0.3 }}
+                  />
                 )}
               </motion.div>
             ))}

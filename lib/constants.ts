@@ -25,18 +25,16 @@ export const SOCIAL_LINKS = {
 
 export const NAVIGATION_ITEMS = [
   { label: 'Главная', href: '/' },
-  { label: 'Каталог', href: '#catalog' },
+  { label: 'Портфолио', href: '#portfolio' },
   { label: 'О нас', href: '#about' },
   { label: 'Контакты', href: '#contacts' },
 ];
 
-export const PRODUCT_CATEGORIES = [
-  { id: 'sofas', name: 'Диваны', icon: '🛋️' },
-  { id: 'chairs', name: 'Стулья', icon: '🪑' },
-  { id: 'tables', name: 'Столы', icon: '🪑' },
-  { id: 'beds', name: 'Кровати', icon: '🛏️' },
-  { id: 'wardrobes', name: 'Шкафы', icon: '🚪' },
+export const PROJECT_CATEGORIES = [
+  { id: 'all', name: 'Все проекты', icon: '✨' },
+  { id: 'living-room', name: 'Гостиные', icon: '🛋️' },
+  { id: 'bedroom', name: 'Спальни', icon: '🛏️' },
   { id: 'kitchen', name: 'Кухни', icon: '🍳' },
-  { id: 'office', name: 'Офисная', icon: '💼' },
-  { id: 'custom', name: 'Под заказ', icon: '✨' },
+  { id: 'office', name: 'Кабинеты', icon: '💼' },
+  { id: 'commercial', name: 'Коммерческие', icon: '🏢' },
 ];
