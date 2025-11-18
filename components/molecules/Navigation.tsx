@@ -32,6 +32,12 @@ export const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const isActive = (href: string) => {
+    if (typeof window === 'undefined') return false;
+    return window.location.pathname === href || 
+           (href !== '/' && window.location.pathname.startsWith(href));
+  };
+
   return (
     <>
       <motion.nav
@@ -59,10 +65,14 @@ export const Navigation = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {NAVIGATION_ITEMS.map((item, index) => (
-                <motion.button
+                <motion.a
                   key={item.href}
-                  onClick={() => handleNavClick(item.href)}
-                  className="text-white/90 hover:text-white ios-transition font-medium"
+                  href={item.href}
+                  className={`font-medium ios-transition relative ${
+                    isActive(item.href) 
+                      ? 'text-[var(--color-primary)]' 
+                      : 'text-white/80 hover:text-white'
+                  }`}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -70,19 +80,32 @@ export const Navigation = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   {item.label}
-                </motion.button>
+                  {isActive(item.href) && (
+                    <motion.div
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--color-primary)]"
+                      layoutId="activeNav"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </motion.a>
               ))}
             </div>
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <Button
-                variant="primary"
-                size="md"
-                onClick={() => handleNavClick('#contacts')}
+              <motion.a
+                href="/contacts"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Заказать звонок
-              </Button>
+                <Button
+                  variant="primary"
+                  size="md"
+                  className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-light)] border-none"
+                >
+                  Заказать звонок
+                </Button>
+              </motion.a>
             </div>
 
             {/* Mobile Menu Button */}

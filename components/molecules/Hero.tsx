@@ -12,32 +12,41 @@ import { smoothScrollTo } from '@/lib/utils';
 export const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Animated Glass Orbs */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full glass-strong"
-            style={{
-              width: `${200 + i * 80}px`,
-              height: `${200 + i * 80}px`,
-              left: `${15 + i * 15}%`,
-              top: `${10 + i * 12}%`,
-            }}
-            animate={{
-              y: [0, -40, 0],
-              x: [0, 30, 0],
-              scale: [1, 1.15, 1],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 10 + i * 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: i * 0.5,
-            }}
-          />
-        ))}
+      {/* Pink Glow Effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-20 right-20 w-96 h-96 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(255,107,157,0.3) 0%, transparent 70%)',
+            filter: 'blur(80px)',
+          }}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-20 w-96 h-96 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(255,107,157,0.2) 0%, transparent 70%)',
+            filter: 'blur(80px)',
+          }}
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 1,
+          }}
+        />
       </div>
 
       {/* Content */}
@@ -50,28 +59,25 @@ export const Hero = () => {
         >
           {/* Main Title with Glass Background */}
           <motion.div
-            className="inline-block glass-strong rounded-3xl px-8 py-4 mb-8"
+            className="inline-block glass-pink rounded-3xl px-8 py-4 mb-8 border border-[var(--color-primary)]/30"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <span className="text-lg text-white/90 font-medium">
+            <span className="text-lg text-[var(--color-primary)] font-medium">
               ✨ Индивидуальное производство мебели
             </span>
           </motion.div>
 
           <motion.h1
-            className="text-6xl sm:text-7xl lg:text-8xl font-bold text-white leading-tight"
+            className="text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            style={{
-              textShadow: '0 4px 30px rgba(0, 0, 0, 0.3)',
-            }}
           >
-            Мебель вашей
+            <span className="text-white">Мебель вашей</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-purple-200">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)]">
               мечты
             </span>
           </motion.h1>
@@ -97,23 +103,33 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => smoothScrollTo('portfolio')}
-              className="glass-strong border-2 border-white/30 text-white hover:scale-105"
+            <motion.a
+              href="/portfolio"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Смотреть портфолио
-            </Button>
+              <Button
+                variant="primary"
+                size="lg"
+                className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-light)] border-none text-white shadow-lg shadow-[var(--color-primary)]/30"
+              >
+                Смотреть портфолио
+              </Button>
+            </motion.a>
             
-            <Button
-              variant="glass"
-              size="lg"
-              onClick={() => smoothScrollTo('contacts')}
-              className="text-white border-2 border-white/30 hover:glass-strong"
+            <motion.a
+              href="/contacts"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Заказать проект
-            </Button>
+              <Button
+                variant="glass"
+                size="lg"
+                className="text-white border border-white/30 hover:border-[var(--color-primary)]/50 hover:glass-pink"
+              >
+                Заказать проект
+              </Button>
+            </motion.a>
           </motion.div>
 
           {/* Stats */}
@@ -130,13 +146,17 @@ export const Hero = () => {
             ].map((stat, i) => (
               <motion.div
                 key={i}
-                className="glass-strong rounded-3xl p-6"
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ type: 'spring', stiffness: 300 }}
+                className="glass-strong rounded-3xl p-6 border border-white/10 hover:border-[var(--color-primary)]/30"
+                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
-                <div className="text-4xl font-bold text-white mb-2">
+                <motion.div 
+                  className="text-4xl font-bold text-[var(--color-primary)] mb-2"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: 'spring', stiffness: 400 }}
+                >
                   {stat.value}
-                </div>
+                </motion.div>
                 <div className="text-sm text-white/80">{stat.label}</div>
               </motion.div>
             ))}
@@ -150,9 +170,9 @@ export const Hero = () => {
         animate={{ y: [0, 15, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <div className="w-6 h-10 rounded-full glass-strong border-2 border-white/40 flex justify-center p-2">
+        <div className="w-6 h-10 rounded-full glass-strong border border-[var(--color-primary)]/30 flex justify-center p-2">
           <motion.div
-            className="w-1 h-3 bg-white/80 rounded-full"
+            className="w-1 h-3 bg-[var(--color-primary)] rounded-full"
             animate={{ y: [0, 16, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           />

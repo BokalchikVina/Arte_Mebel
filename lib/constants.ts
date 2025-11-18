@@ -25,9 +25,9 @@ export const SOCIAL_LINKS = {
 
 export const NAVIGATION_ITEMS = [
   { label: 'Главная', href: '/' },
-  { label: 'Портфолио', href: '#portfolio' },
-  { label: 'О нас', href: '#about' },
-  { label: 'Контакты', href: '#contacts' },
+  { label: 'Портфолио', href: '/portfolio' },
+  { label: 'О нас', href: '/about' },
+  { label: 'Контакты', href: '/contacts' },
 ];
 
 export const PROJECT_CATEGORIES = [
