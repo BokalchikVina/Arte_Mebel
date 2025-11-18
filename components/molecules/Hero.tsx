@@ -11,9 +11,36 @@ import { smoothScrollTo } from '@/lib/utils';
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Pink Glow Effects */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Animated Glass Orbs Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Glass Orbs */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`orb-${i}`}
+            className="absolute rounded-full glass-strong border border-white/10"
+            style={{
+              width: `${150 + i * 60}px`,
+              height: `${150 + i * 60}px`,
+              left: `${10 + i * 12}%`,
+              top: `${5 + i * 11}%`,
+            }}
+            animate={{
+              y: [0, -50, 0],
+              x: [0, 40, 0],
+              scale: [1, 1.1, 1],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 15 + i * 3,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: i * 0.8,
+            }}
+          />
+        ))}
+        
+        {/* Pink Glow Effects */}
         <motion.div
           className="absolute top-20 right-20 w-96 h-96 rounded-full"
           style={{

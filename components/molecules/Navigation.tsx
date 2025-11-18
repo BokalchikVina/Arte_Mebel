@@ -94,16 +94,16 @@ export const Navigation = () => {
             {/* CTA Button */}
             <div className="hidden md:block">
               <motion.a
-                href="/contacts"
+                href="tel:+79829268242"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Button
                   variant="primary"
                   size="md"
-                  className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-light)] border-none"
+                  className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-light)] border-none shadow-lg shadow-[var(--color-primary)]/30"
                 >
-                  Заказать звонок
+                  📞 Позвонить
                 </Button>
               </motion.a>
             </div>
@@ -132,6 +132,9 @@ export const Navigation = () => {
           </div>
         </div>
       </motion.nav>
+      
+      {/* Spacer for fixed nav */}
+      <div className="h-24" />
 
       {/* Mobile Menu */}
       <AnimatePresence>

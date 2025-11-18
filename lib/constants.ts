@@ -4,23 +4,23 @@
  */
 
 export const SITE_CONFIG = {
-  name: 'Мебель на Заказ',
-  title: 'Мебель на Заказ — Индивидуальное производство мебели',
-  description: 'Изготовление мебели на заказ по индивидуальным размерам. Современный дизайн, качественные материалы, быстрая доставка.',
-  url: 'https://furniture-store.ru',
+  name: 'Arte Mebel',
+  title: 'Arte Mebel — Индивидуальное производство мебели премиум-класса',
+  description: 'Arte Mebel - искусство в каждой детали. Изготовление мебели на заказ по индивидуальным размерам. Современный дизайн, качественные материалы, быстрая доставка.',
+  url: 'https://artemebel.ru',
   ogImage: '/og-image.jpg',
-  phone: '+7 (999) 123-45-67',
-  email: 'info@furniture-store.ru',
-  address: 'Москва, ул. Примерная, д. 1',
+  phone: '8 982 926 82 42',
+  email: 'arte72@yandex.ru',
+  address: 'Тюмень, Россия',
   workingHours: 'Пн-Пт: 9:00-20:00, Сб-Вс: 10:00-18:00',
 };
 
 export const YANDEX_METRIKA_ID = 12345678; // Замените на ваш ID
 
 export const SOCIAL_LINKS = {
-  vk: 'https://vk.com/yourpage',
-  telegram: 'https://t.me/yourpage',
-  whatsapp: 'https://wa.me/79991234567',
+  vk: 'https://vk.com/artemebel',
+  telegram: 'https://t.me/artemebel',
+  whatsapp: 'https://wa.me/79829268242',
 };
 
 export const NAVIGATION_ITEMS = [

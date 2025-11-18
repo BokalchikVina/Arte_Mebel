@@ -22,10 +22,10 @@ export const ContactsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             Свяжитесь с нами
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-white/60 max-w-2xl mx-auto">
             Оставьте заявку, и мы перезвоним в течение 15 минут
           </p>
         </motion.div>
@@ -50,22 +50,22 @@ export const ContactsSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             {/* Phone */}
-            <Card variant="glass" padding="lg" hoverable>
+            <Card variant="glass" padding="lg" hoverable className="border border-[var(--color-primary)]/20 hover:border-[var(--color-primary)]/50">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-ios-blue rounded-2xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-[var(--color-primary)]/30">
                   <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Телефон</h3>
+                  <h3 className="font-semibold text-white mb-1">Телефон</h3>
                   <a
-                    href={`tel:${SITE_CONFIG.phone}`}
-                    className="text-ios-blue hover:underline text-lg"
+                    href="tel:+79829268242"
+                    className="text-[var(--color-primary)] hover:text-[var(--color-primary-light)] text-lg font-medium"
                   >
                     {SITE_CONFIG.phone}
                   </a>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-sm text-white/60 mt-1">
                     {SITE_CONFIG.workingHours}
                   </p>
                 </div>
@@ -73,19 +73,19 @@ export const ContactsSection = () => {
             </Card>
 
             {/* Email */}
-            <Card variant="glass" padding="lg" hoverable>
+            <Card variant="glass" padding="lg" hoverable className="border border-[var(--color-primary)]/20 hover:border-[var(--color-primary)]/50">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-ios-blue rounded-2xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-[var(--color-primary)]/30">
                   <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
+                  <h3 className="font-semibold text-white mb-1">Email</h3>
                   <a
                     href={`mailto:${SITE_CONFIG.email}`}
-                    className="text-ios-blue hover:underline text-lg"
+                    className="text-[var(--color-primary)] hover:text-[var(--color-primary-light)] text-lg"
                   >
                     {SITE_CONFIG.email}
                   </a>
@@ -94,16 +94,16 @@ export const ContactsSection = () => {
             </Card>
 
             {/* Address */}
-            <Card variant="glass" padding="lg" hoverable>
+            <Card variant="glass" padding="lg" hoverable className="border border-white/10">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-ios-blue rounded-2xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 glass-strong rounded-2xl flex items-center justify-center flex-shrink-0 border border-white/10">
                   <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-1">Адрес</h3>
-                  <p className="text-gray-700 text-lg">{SITE_CONFIG.address}</p>
+                  <h3 className="font-semibold text-white mb-1">Адрес</h3>
+                  <p className="text-white/60 text-lg">{SITE_CONFIG.address}</p>
                 </div>
               </div>
             </Card>
