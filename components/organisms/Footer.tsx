@@ -119,16 +119,22 @@ export const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-white/30 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-white/80">
-          <p>© {currentYear} {SITE_CONFIG.name}. Все права защищены.</p>
-          <div className="flex gap-4 mt-4 md:mt-0">
-            <button className="hover:text-white ios-transition">
-              Политика конфиденциальности
-            </button>
-            <button className="hover:text-white ios-transition">
-              Договор оферты
-            </button>
+        <div className="border-t border-white/30 mt-8 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center text-sm text-white/80 mb-4">
+            <p>© {currentYear} {SITE_CONFIG.name}. Все права защищены.</p>
+            <div className="flex gap-4 mt-4 md:mt-0">
+              <button className="hover:text-white ios-transition">
+                Политика конфиденциальности
+              </button>
+              <button className="hover:text-white ios-transition">
+                Договор оферты
+              </button>
+            </div>
           </div>
+          <p className="text-center text-white/40 text-xs">
+            Входит в состав группы компаний{' '}
+            <span className="text-[var(--color-primary)] font-semibold">ARTE GROUP</span>
+          </p>
         </div>
       </div>
     </footer>

@@ -1,305 +1,336 @@
-# 🚀 Инструкция по деплою и запуску
-
-## Быстрый деплой на Vercel (5 минут)
-
-### Шаг 1: Подготовка
-
-1. Убедитесь, что все файлы сохранены
-2. Зарегистрируйтесь на [vercel.com](https://vercel.com) (можно через GitHub)
-
-### Шаг 2: Установка Vercel CLI
-
-```bash
-npm install -g vercel
-```
-
-### Шаг 3: Деплой
-
-```bash
-# Войдите в аккаунт
-vercel login
-
-# Запустите деплой
-vercel
-
-# Для production деплоя
-vercel --prod
-```
-
-### Шаг 4: Настройка переменных окружения
-
-После деплоя перейдите в:
-1. Vercel Dashboard → Ваш проект → Settings → Environment Variables
-2. Добавьте переменные из `.env.example`:
-
-```
-NEXT_PUBLIC_YANDEX_METRIKA_ID=12345678
-NEXT_PUBLIC_SITE_URL=https://ваш-домен.vercel.app
-NEXT_PUBLIC_PHONE=+79991234567
-NEXT_PUBLIC_EMAIL=info@domain.ru
-```
-
-3. Сделайте redeploy для применения переменных
-
-## 📊 Настройка Yandex Metrika
-
-### Шаг 1: Создание счетчика
-
-1. Перейдите на [metrika.yandex.ru](https://metrika.yandex.ru)
-2. Нажмите "Добавить счетчик"
-3. Укажите URL вашего сайта
-4. Скопируйте ID счетчика
-
-### Шаг 2: Интеграция
-
-1. Откройте `lib/constants.ts`
-2. Замените `YANDEX_METRIKA_ID` на ваш ID:
-```typescript
-export const YANDEX_METRIKA_ID = 12345678; // Ваш ID
-```
-
-### Шаг 3: Верификация
-
-1. В Яндекс.Метрике выберите "Проверить"
-2. Выберите метод "Meta-тег"
-3. Скопируйте код верификации
-4. Добавьте в `app/layout.tsx`:
-```tsx
-<meta name="yandex-verification" content="ваш-код" />
-```
-
-### Шаг 4: Настройка целей
-
-Создайте цели в Метрике:
-
-| Название | Тип | Условие |
-|----------|-----|---------|
-| Заявка отправлена | JavaScript событие | contact_form_submit |
-| Клик заказать | JavaScript событие | product_order_click |
-| Просмотр каталога | URL содержит | #catalog |
-| Просмотр контактов | URL содержит | #contacts |
-
-## 🗺️ Настройка Yandex Maps
-
-### Шаг 1: Получение API ключа
-
-1. Перейдите на [developer.tech.yandex.ru](https://developer.tech.yandex.ru)
-2. Зарегистрируйтесь и создайте приложение
-3. Получите API ключ для JavaScript API
-
-### Шаг 2: Добавление карты
-
-1. Добавьте ключ в `.env.local`:
-```
-NEXT_PUBLIC_YANDEX_MAP_API_KEY=ваш-ключ
-```
-
-2. Раскомментируйте код в `components/organisms/ContactsSection.tsx`:
-```tsx
-<Script
-  src={`https://api-maps.yandex.ru/2.1/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAP_API_KEY}&lang=ru_RU`}
-  strategy="lazyOnload"
-/>
-```
-
-3. Добавьте координаты вашего офиса
-
-## 🌐 Настройка домена
-
-### На Vercel:
-
-1. Купите домен (reg.ru, timeweb.com)
-2. В Vercel: Settings → Domains → Add Domain
-3. Добавьте DNS записи (Vercel покажет какие)
-4. Дождитесь propagation (до 48 часов)
-
-### SSL сертификат:
-
-Vercel автоматически выпустит Let's Encrypt сертификат.
-
-## 📧 Настройка форм
-
-### Вариант 1: Telegram Bot
-
-1. Создайте бота через [@BotFather](https://t.me/botfather)
-2. Получите токен и chat_id
-3. Создайте API endpoint в `app/api/contact/route.ts`:
-
-```typescript
-export async function POST(request: Request) {
-  const data = await request.json();
-  
-  // Отправка в Telegram
-  await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: TELEGRAM_CHAT_ID,
-      text: `Новая заявка:\nИмя: ${data.name}\nТелефон: ${data.phone}`,
-    }),
-  });
-  
-  return Response.json({ success: true });
-}
-```
-
-### Вариант 2: Email (SendGrid/Resend)
-
-1. Зарегистрируйтесь на [resend.com](https://resend.com)
-2. Получите API ключ
-3. Установите: `npm install resend`
-4. Создайте API endpoint
-
-### Вариант 3: CRM интеграция
-
-- **AmoCRM**: используйте их API
-- **Битрикс24**: webhook integration
-- **Google Sheets**: через Google Apps Script
-
-## 🎨 Брендирование
-
-### Логотип:
-
-1. Замените эмодзи 🪑 на свой логотип в:
-   - `components/molecules/Navigation.tsx`
-   - `components/organisms/Footer.tsx`
-   - `app/layout.tsx` (favicon)
-
-### Цвета:
-
-Измените в `tailwind.config.ts`:
-```typescript
-colors: {
-  brand: {
-    primary: '#ваш-цвет',
-    secondary: '#ваш-цвет',
-  }
-}
-```
-
-### Шрифты:
-
-Для использования кастомных шрифтов:
-```typescript
-// app/layout.tsx
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['cyrillic'] })
-```
-
-## 📸 Изображения товаров
-
-### Рекомендуемые размеры:
-
-- **Товары**: 800x800px (квадрат)
-- **Герои**: 1920x1080px (16:9)
-- **OG Image**: 1200x630px
-- **Favicon**: 32x32px, 16x16px
-- **PWA Icons**: 192x192px, 512x512px
-
-### Оптимизация:
-
-1. Используйте WebP формат
-2. Сжимайте через [tinypng.com](https://tinypng.com)
-3. Next.js автоматически оптимизирует через Image component
-
-## 🔍 SEO Checklist
-
-- [x] Meta теги настроены
-- [x] Open Graph для соцсетей
-- [x] robots.txt создан
-- [ ] Создать sitemap.xml
-- [ ] Зарегистрироваться в Яндекс.Вебмастер
-- [ ] Зарегистрироваться в Google Search Console
-- [ ] Добавить микроразметку Schema.org
-- [ ] Настроить ЧПУ URLs
-- [ ] Добавить alt теги ко всем изображениям
-- [ ] Оптимизировать мета-описания
-
-## 🎯 Настройка рекламы
-
-### Yandex.Direct:
-
-1. Создайте аккаунт на [direct.yandex.ru](https://direct.yandex.ru)
-2. Добавьте счетчик Метрики
-3. Настройте цели конверсии
-4. Создайте рекламные кампании
-
-### Пиксель ретаргетинга:
-
-Добавьте в `app/layout.tsx` после Метрики:
-```tsx
-<Script id="yandex-audience">
-  {`/* Код пикселя аудиторий */`}
-</Script>
-```
-
-## 📱 Mobile App
-
-Для создания PWA:
-
-1. Пользователи могут установить сайт как приложение
-2. Иконка появится на главном экране
-3. Работает как нативное приложение
-
-Проверьте работу в Lighthouse.
-
-## 🔐 Безопасность
-
-### Обязательно:
-
-1. **HTTPS** - автоматически через Vercel
-2. **Environment Variables** - никогда не коммитьте в git
-3. **API Keys** - храните в .env.local
-4. **CORS** - настройте для API endpoints
-5. **Rate Limiting** - добавьте для форм
-
-### Headers безопасности:
-
-Добавьте в `next.config.js`:
-```javascript
-headers: async () => [
-  {
-    source: '/:path*',
-    headers: [
-      { key: 'X-DNS-Prefetch-Control', value: 'on' },
-      { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-      { key: 'X-Content-Type-Options', value: 'nosniff' },
-    ],
-  },
-],
-```
-
-## 📊 Мониторинг
-
-### Рекомендуемые сервисы:
-
-1. **Uptime monitoring**: [uptimerobot.com](https://uptimerobot.com)
-2. **Performance**: Lighthouse CI
-3. **Errors**: Sentry
-4. **Analytics**: Yandex Metrika + Google Analytics
-
-## 💰 Стоимость запуска
-
-| Сервис | Стоимость |
-|--------|-----------|
-| Vercel | Бесплатно (Hobby) |
-| Домен .ru | ~200₽/год |
-| Yandex Metrika | Бесплатно |
-| Yandex Maps | Бесплатно (до лимита) |
-| SSL сертификат | Бесплатно (Let's Encrypt) |
-| **Итого** | **~200₽/год** |
-
-## 🎉 Готово к запуску!
-
-После выполнения всех шагов ваш сайт:
-- ✅ Доступен по красивому домену
-- ✅ Имеет аналитику
-- ✅ Оптимизирован для SEO
-- ✅ Готов принимать заявки
-- ✅ Работает на мобильных
-- ✅ Имеет PWA поддержку
+# 🚀 Руководство по деплою Arte Mebel
+
+## 📋 Содержание
+- [Быстрый старт](#быстрый-старт)
+- [Vercel Deploy](#vercel-deploy)
+- [Docker Deploy](#docker-deploy)
+- [VPS Deploy](#vps-deploy)
+- [Переменные окружения](#переменные-окружения)
 
 ---
 
-**Нужна помощь?** Создайте Issue в репозитории!
+## ⚡ Быстрый старт
+
+### Локальный запуск
+
+```bash
+# Установка зависимостей
+npm install
+
+# Запуск dev сервера
+npm run dev
+
+# Откройте http://localhost:3000
+```
+
+### Админ панель
+- URL: `http://localhost:3000/admin`
+- Email: `admin@artemebel.ru`
+- Password: `admin123` (поменяйте в production!)
+
+### Личный кабинет
+- URL: `http://localhost:3000/cabinet`
+
+---
+
+## 🔷 Vercel Deploy (Рекомендуется)
+
+### Через Vercel CLI
+
+```bash
+# Установка Vercel CLI
+npm i -g vercel
+
+# Логин
+vercel login
+
+# Деплой
+vercel
+
+# Production деплой
+vercel --prod
+```
+
+### Через GitHub
+
+1. **Push в GitHub:**
+   ```bash
+   git push origin main
+   ```
+
+2. **Подключите репозиторий на Vercel:**
+   - Откройте [vercel.com](https://vercel.com)
+   - Import Project → GitHub
+   - Выберите репозиторий `Arte_Mebel`
+   - Deploy
+
+3. **Настройте Environment Variables:**
+   ```
+   NEXTAUTH_SECRET=your-secret-key
+   ADMIN_EMAIL=admin@artemebel.ru
+   ADMIN_PASSWORD=your-secure-password
+   ```
+
+4. **Автоматический деплой:**
+   - Каждый push в `main` → Production
+   - Pull Requests → Preview deployments
+
+---
+
+## 🐳 Docker Deploy
+
+### Development
+
+```bash
+docker-compose up dev
+```
+
+### Production
+
+```bash
+# Build
+docker-compose build prod
+
+# Run
+docker-compose up prod
+
+# В фоне
+docker-compose up -d prod
+```
+
+### Docker Hub
+
+```bash
+# Build образа
+docker build -t artemebel/website:latest .
+
+# Push в Docker Hub
+docker push artemebel/website:latest
+
+# Pull и запуск на сервере
+docker pull artemebel/website:latest
+docker run -p 3000:3000 artemebel/website:latest
+```
+
+---
+
+## 🖥️ VPS Deploy (Ubuntu/Debian)
+
+### 1. Подготовка сервера
+
+```bash
+# Обновление системы
+sudo apt update && sudo apt upgrade -y
+
+# Установка Node.js 20
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# Установка PM2
+sudo npm install -g pm2
+
+# Установка Nginx
+sudo apt install -y nginx
+```
+
+### 2. Клонирование проекта
+
+```bash
+cd /var/www
+git clone https://github.com/BokalchikVina/Arte_Mebel.git
+cd Arte_Mebel
+
+# Установка зависимостей
+npm install
+
+# Build
+npm run build
+```
+
+### 3. Настройка PM2
+
+```bash
+# Создайте ecosystem.config.js
+cat > ecosystem.config.js << 'EOF'
+module.exports = {
+  apps: [{
+    name: 'artemebel',
+    script: 'npm',
+    args: 'start',
+    cwd: '/var/www/Arte_Mebel',
+    instances: 2,
+    exec_mode: 'cluster',
+    env: {
+      NODE_ENV: 'production',
+      PORT: 3000
+    }
+  }]
+}
+EOF
+
+# Запуск
+pm2 start ecosystem.config.js
+
+# Автозапуск
+pm2 startup
+pm2 save
+```
+
+### 4. Настройка Nginx
+
+```bash
+# Создайте конфиг
+sudo nano /etc/nginx/sites-available/artemebel
+
+# Вставьте:
+server {
+    listen 80;
+    server_name artemebel.ru www.artemebel.ru;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+# Активируйте
+sudo ln -s /etc/nginx/sites-available/artemebel /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+### 5. SSL (Let's Encrypt)
+
+```bash
+# Установка Certbot
+sudo apt install -y certbot python3-certbot-nginx
+
+# Получение сертификата
+sudo certbot --nginx -d artemebel.ru -d www.artemebel.ru
+
+# Автообновление
+sudo certbot renew --dry-run
+```
+
+---
+
+## 🔐 Переменные окружения
+
+### Production (.env.production)
+
+```bash
+# Database
+DATABASE_URL="file:./lib/db.json"
+
+# Auth
+NEXTAUTH_URL="https://artemebel.ru"
+NEXTAUTH_SECRET="generate-with-openssl-rand-base64-32"
+
+# Admin
+ADMIN_EMAIL="admin@artemebel.ru"
+ADMIN_PASSWORD="strong-password-here"
+
+# Yandex
+YANDEX_METRIKA_ID="ваш-id"
+
+# Node
+NODE_ENV="production"
+PORT="3000"
+```
+
+### Генерация секретных ключей
+
+```bash
+# NEXTAUTH_SECRET
+openssl rand -base64 32
+
+# Or
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+---
+
+## 📦 Обновление на production
+
+### Vercel
+```bash
+git push origin main  # Автоматический деплой
+```
+
+### VPS
+```bash
+cd /var/www/Arte_Mebel
+git pull origin main
+npm install
+npm run build
+pm2 restart artemebel
+```
+
+### Docker
+```bash
+docker-compose down
+docker-compose build prod
+docker-compose up -d prod
+```
+
+---
+
+## 🔍 Мониторинг
+
+### PM2
+```bash
+pm2 status      # Статус
+pm2 logs        # Логи
+pm2 monit       # Мониторинг
+pm2 restart all # Перезапуск
+```
+
+### Docker
+```bash
+docker-compose logs -f      # Логи
+docker stats                # Использование ресурсов
+docker-compose restart prod # Перезапуск
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Порт занят
+```bash
+# Найти процесс
+sudo lsof -i :3000
+
+# Убить процесс
+kill -9 PID
+```
+
+### Ошибки сборки
+```bash
+# Очистка
+rm -rf .next node_modules
+npm install
+npm run build
+```
+
+### Проблемы с правами
+```bash
+sudo chown -R $USER:$USER /var/www/Arte_Mebel
+```
+
+---
+
+## 📞 Поддержка
+
+- Email: arte72@yandex.ru
+- Telegram: @artemebel
+- GitHub: https://github.com/BokalchikVina/Arte_Mebel
+
+---
+
+**Created with ❤️ by Arte Mebel**
+*Входит в состав группы компаний ARTE GROUP*

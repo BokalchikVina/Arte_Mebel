@@ -6,6 +6,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/atoms/Card';
 import { Badge } from '@/components/atoms/Badge';
@@ -25,20 +26,21 @@ export const ProjectCard = ({
   onProjectClick,
 }: ProjectCardProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      whileHover={{ y: -10 }}
-    >
-      <Card
-        variant="glass"
-        padding="none"
-        hoverable
-        onClick={() => onProjectClick?.(project)}
-        className="group relative overflow-hidden cursor-pointer"
+    <Link href={`/projects/${project.id}`}>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        whileHover={{ y: -10 }}
       >
+        <Card
+          variant="glass"
+          padding="none"
+          hoverable
+          onClick={() => onProjectClick?.(project)}
+          className="group relative overflow-hidden cursor-pointer noise-texture"
+        >
         {/* Project Image with Parallax */}
         <div className="relative h-80 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
@@ -110,6 +112,7 @@ export const ProjectCard = ({
           </div>
         </div>
       </Card>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 };
