@@ -7,6 +7,8 @@ const nextConfig = {
   },
   compress: true,
   poweredByHeader: false,
+  // Для Docker production build
+  output: 'standalone',
 }
 
 module.exports = nextConfig

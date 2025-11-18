@@ -1,0 +1,23 @@
+# Dockerfile для разработки
+FROM node:18-alpine
+
+# Устанавливаем необходимые пакеты
+RUN apk add --no-cache libc6-compat git
+
+# Создаем рабочую директорию
+WORKDIR /app
+
+# Копируем package files
+COPY package*.json ./
+
+# Устанавливаем зависимости
+RUN npm install
+
+# Копируем все файлы проекта
+COPY . .
+
+# Открываем порт
+EXPOSE 3000
+
+# Запускаем dev сервер
+CMD ["npm", "run", "dev"]
