@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Yandex Bot
+User-agent: Yandex
+Allow: /
+
+# Sitemap
+Sitemap: https://furniture-store.ru/sitemap.xml
