@@ -1,0 +1,17 @@
+{
+  "name": "TailorGlass · мебель в стиле iOS28",
+  "short_name": "TailorGlass",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05060a",
+  "theme_color": "#0c0d13",
+  "description": "Мебель на заказ с мягкими стеклянными слоями и анимациями iOS28.",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+:root {
+  color-scheme: dark;
+  --hue-base: 232;
+  --glass-layer: hsla(var(--hue-base), 45%, 12%, 0.75);
+  --glass-border: hsla(var(--hue-base), 70%, 80%, 0.18);
+  --glass-highlight: hsla(var(--hue-base), 95%, 89%, 0.4);
+  --text-primary: #f8f8ff;
+  --text-secondary: rgba(248, 248, 255, 0.72);
+  --accent-primary: linear-gradient(
+    135deg,
+    #7f8cff 0%,
+    #a1b2ff 35%,
+    #7ae7ff 100%
+  );
+  --accent-secondary: linear-gradient(125deg, #ffb4e6, #ffd1a1);
+  --accent-emerald: linear-gradient(135deg, #2af598, #009efd);
+  --surface-backdrop: rgba(10, 10, 20, 0.72);
+  --border-radius-sm: 14px;
+  --border-radius-md: 24px;
+  --border-radius-lg: 36px;
+  --shadow-soft: 0 20px 45px rgba(4, 4, 19, 0.45);
+  --shadow-border: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --space-xs: 0.4rem;
+  --space-sm: 0.8rem;
+  --space-md: 1.2rem;
+  --space-lg: 1.6rem;
+  --space-xl: 2.4rem;
+  --space-2xl: 3.2rem;
+  --space-3xl: 4.4rem;
+  --text-display: clamp(2.8rem, 4vw, 4.6rem);
+  --text-body: clamp(1rem, 1.2vw, 1.15rem);
+  --text-eyebrow: 0.9rem;
+  --blur-strength: 28px;
+  --transition-snappy: 280ms cubic-bezier(0.32, 0.72, 0, 1);
+  --transition-fluid: 700ms cubic-bezier(0.19, 1, 0.22, 1);
+  --grid-max-width: 1200px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --glass-layer: hsla(var(--hue-base), 35%, 98%, 0.8);
+    --text-primary: #05060a;
+    --text-secondary: rgba(5, 6, 10, 0.68);
+  }
+}
+
+:root[data-motion='reduced'] {
+  --transition-snappy: 0ms linear;
+  --transition-fluid: 0ms linear;
+  --blur-strength: 16px;
+}
