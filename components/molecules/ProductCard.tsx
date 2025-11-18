@@ -6,7 +6,6 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { Card } from '@/components/atoms/Card';
 import { Button } from '@/components/atoms/Button';
 import { Badge } from '@/components/atoms/Badge';

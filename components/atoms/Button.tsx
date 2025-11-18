@@ -33,6 +33,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       rightIcon,
       className,
       disabled,
+      type = 'button',
+      onClick,
       ...props
     },
     ref
@@ -79,12 +81,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <motion.button
         ref={ref}
+        type={type}
+        onClick={onClick}
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         disabled={disabled || isLoading}
         whileTap={{ scale: 0.95 }}
         whileHover={{ scale: 1.02 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-        {...props}
       >
         {isLoading && (
           <svg

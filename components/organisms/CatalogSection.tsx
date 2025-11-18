@@ -15,19 +15,17 @@ import type { Product, ProductCategory } from '@/types';
 
 export const CatalogSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory | 'all'>('all');
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const filteredProducts =
     selectedCategory === 'all'
       ? MOCK_PRODUCTS
       : MOCK_PRODUCTS.filter((p) => p.category === selectedCategory);
 
-  const handleOrderClick = (product: Product) => {
+  const handleOrderClick = (_product: Product) => {
     // Yandex Metrika goal
     if (typeof window !== 'undefined' && (window as any).ym) {
       (window as any).ym(12345678, 'reachGoal', 'product_order_click');
     }
-    setSelectedProduct(product);
     // Scroll to contact form
     const contactsSection = document.getElementById('contacts');
     if (contactsSection) {

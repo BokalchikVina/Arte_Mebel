@@ -27,6 +27,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       hoverable = false,
       padding = 'md',
       className,
+      onClick,
       ...props
     },
     ref
@@ -54,6 +55,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     return (
       <motion.div
         ref={ref}
+        onClick={onClick}
         className={cn(
           baseStyles,
           variants[variant],
@@ -65,7 +67,6 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        {...props}
       >
         {children}
       </motion.div>
