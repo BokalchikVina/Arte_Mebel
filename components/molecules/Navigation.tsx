@@ -41,23 +41,36 @@ export const Navigation = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 ios-transition ${
-          isScrolled ? 'glass-strong shadow-lg' : 'glass-subtle'
-        }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-8 px-8"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 100, damping: 20 }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+        <motion.div 
+          className={`max-w-5xl w-full rounded-3xl px-8 py-4 ios-transition ${
+            isScrolled ? 'glass-strong' : 'glass'
+          } border border-white/20 backdrop-blur-2xl noise-texture`}
+          style={{
+            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1) inset',
+          }}
+          animate={{
+            y: [0, -3, 0],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <div className="flex items-center justify-between">
             {/* Logo */}
             <motion.div
               className="flex items-center space-x-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="text-3xl">✨</span>
-              <span className="text-xl font-bold text-white drop-shadow-lg">
+              <span className="text-2xl">✨</span>
+              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-[var(--color-primary)] drop-shadow-2xl">
                 {SITE_CONFIG.name}
               </span>
             </motion.div>
@@ -71,7 +84,7 @@ export const Navigation = () => {
                   className={`font-medium ios-transition relative ${
                     isActive(item.href) 
                       ? 'text-[var(--color-primary)]' 
-                      : 'text-white/80 hover:text-white'
+                      : 'text-white/95 hover:text-white'
                   }`}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -130,11 +143,11 @@ export const Navigation = () => {
               </div>
             </motion.button>
           </div>
-        </div>
+        </motion.div>
       </motion.nav>
       
       {/* Spacer for fixed nav */}
-      <div className="h-24" />
+      <div className="h-32" />
 
       {/* Mobile Menu */}
       <AnimatePresence>

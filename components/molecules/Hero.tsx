@@ -101,22 +101,25 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
+            style={{
+              textShadow: '0 4px 30px rgba(0, 0, 0, 0.5)',
+            }}
           >
-            <span className="text-white">Мебель вашей</span>
+            <span className="text-white drop-shadow-2xl">Мебель вашей</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] drop-shadow-2xl">
               мечты
             </span>
           </motion.h1>
 
           {/* Subtitle with Glass */}
           <motion.div
-            className="glass rounded-3xl px-8 py-6 max-w-3xl mx-auto"
+            className="glass rounded-3xl px-8 py-6 max-w-3xl mx-auto noise-texture"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            <p className="text-xl sm:text-2xl text-white/95 font-light">
+            <p className="text-xl sm:text-2xl text-white/95 font-light relative z-10">
               От эскиза до воплощения — создаём уникальные интерьеры
               <br />
               премиум-класса по вашему проекту
@@ -173,18 +176,18 @@ export const Hero = () => {
             ].map((stat, i) => (
               <motion.div
                 key={i}
-                className="glass-strong rounded-3xl p-6 border border-white/10 hover:border-[var(--color-primary)]/30"
+                className="glass-strong rounded-3xl p-6 border border-white/10 hover:border-[var(--color-primary)]/30 noise-texture"
                 whileHover={{ scale: 1.05, y: -10 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
                 <motion.div 
-                  className="text-4xl font-bold text-[var(--color-primary)] mb-2"
+                  className="text-4xl font-bold text-[var(--color-primary)] mb-2 relative z-10 drop-shadow-lg"
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: 'spring', stiffness: 400 }}
                 >
                   {stat.value}
                 </motion.div>
-                <div className="text-sm text-white/80">{stat.label}</div>
+                <div className="text-sm text-white/90 relative z-10">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
